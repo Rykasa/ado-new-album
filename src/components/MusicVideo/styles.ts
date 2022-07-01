@@ -1,8 +1,11 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom';
 
-export const container = styled.a`
+export const container = styled(Link)<{ isVideoReleased: boolean }>`
   cursor: pointer;
   display: block;
+
+  pointer-events: ${({isVideoReleased}) => !isVideoReleased ? 'none' : ''} ;
 
   & + & {
       margin-top: 2rem;
@@ -21,12 +24,13 @@ export const date = styled.span`
   display: block;
 `;
 
-export const MVContainer = styled.div`
+export const MVContainer = styled.div<{ isActiveVideo: boolean }>`
   border: .0625rem solid #8D8D99;
   border-radius: .25rem;
   padding: 1rem;
-  /* background-color: var(--primary-color);
-  border-color: var(--primary-color); selected */
+  background-color: ${({isActiveVideo}) => isActiveVideo ? 'var(--primary-color)' : ''};
+  border-color: ${({isActiveVideo}) => isActiveVideo ? 'var(--primary-color)' : ''};
+
   position: relative;
 
   &:before{
@@ -41,21 +45,23 @@ export const MVContainer = styled.div`
     border-top: 0 solid transparent;
     border-right: 1.25rem solid transparent;
     transform: rotate(45deg) translateY(-65%);
-    /* border-color: var(--primary-color); */
+    border-color: ${({isActiveVideo}) => isActiveVideo ? 'var(--primary-color)' : ''};
   }
 `;
 
 
-export const MVHeader = styled.header`
+export const MVHeader = styled.header<{ isVideoReleased: boolean, isActiveVideo: boolean }>`
   display: flex;
   align-items: center;
   gap: .5rem;
   margin-bottom: 1rem;
   font-size: .875rem;
   line-height: 1.375rem;
-  color: #F9ABBB; //released
+  //color: #F9ABBB; //released
+  color: ${({isVideoReleased}) => isVideoReleased ? '#F9ABBB' : '#B75C4F'};
   /* color: #B75C4F; coming*/
   /* color: #fff; selected*/
+  color: ${({isActiveVideo}) => isActiveVideo ? '#fff' : '' };
   font-weight: 600;
 `;
 

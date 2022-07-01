@@ -1,26 +1,40 @@
+import { format, isPast, parseISO } from 'date-fns';
 import { FaLock, FaRegCheckCircle } from 'react-icons/fa'
+import { useParams } from 'react-router-dom';
 import * as C from './styles' 
 
-export function MusicVideo(){
+interface MusicVideoProps{
+  available_at: Date;
+  title: string;
+  slug: string;
+}
+
+export function MusicVideo({ available_at, title, slug: props_slug }: MusicVideoProps){
+  const { slug } = useParams<{ slug: string }>()
+
+  const isVideoReleased = isPast(parseISO(available_at.toString()))
+  const availableDateFormatted = format(new Date(available_at), "dd MMM yyyy")
+
+  const isActiveVideo = slug === props_slug
   return(
-    <C.container>
+    <C.container to={`/video/${props_slug}`} isVideoReleased={isVideoReleased}>
       <C.date>
-        Jun 22, 2022
+        {availableDateFormatted}
       </C.date>
-      <C.MVContainer>
-        {true ? (
-          <C.MVHeader>
+      <C.MVContainer isActiveVideo={isActiveVideo}>
+        {isVideoReleased ? (
+          <C.MVHeader isVideoReleased={isVideoReleased} isActiveVideo={isActiveVideo}>
             <FaRegCheckCircle size={20} />
             Released
           </C.MVHeader>
         ) : (
-          <C.MVHeader>
+          <C.MVHeader isVideoReleased={isVideoReleased} isActiveVideo={isActiveVideo}>
             <FaLock size={20} />
             Cooming soon
           </C.MVHeader>
         )}
         <C.MVDesc>
-          【Ado】私は最強 (ウタ from ONE PIECE FILM RED)
+          {title}
         </C.MVDesc>
       </C.MVContainer>
     </C.container>

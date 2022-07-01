@@ -8,6 +8,7 @@ export function App(){
       <BrowserRouter>
         <Routes>
           <Route path="/event" element={<MVEvent />} />
+          <Route path="/video/:slug" element={<MVEvent />} />
         </Routes>
       </BrowserRouter>
     </GlobalContextProvider>

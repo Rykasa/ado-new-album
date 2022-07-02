@@ -4,14 +4,59 @@ import {  Youtube ,Player, DefaultUi } from '@vime/react'
 import { FaLink, FaTwitter, FaYoutube } from 'react-icons/fa'
 
 import '@vime/core/themes/default.css';
+import { api } from '../../services/api';
+import { useEffect, useState } from 'react';
 
-export function Video(){
+interface VideoType{
+  videoSlug: string | undefined;
+}
+
+interface getSingleMusicVideoResponse{
+  available_at: string;
+  description: string;
+  slug: string;
+  title: string;
+  video_id: string;
+  singer: {
+    name: string;
+    avatar_url: string;
+    twitter: string;
+    youtube: string;
+  }
+  feat: {
+    name: string;
+    twitter: string;
+    youtube: string;
+  }
+}
+
+
+export function Video({videoSlug}: VideoType){
+  const [video, setVideo] = useState<getSingleMusicVideoResponse | null>(null)
+
+  async function getSingleMusicVideo(){
+    const result = await api.get<getSingleMusicVideoResponse>(`/video/${videoSlug}`)
+    const { data } = result
+    setVideo(data)
+  }
+
+  useEffect(() =>{
+    setVideo(null)
+    getSingleMusicVideo()
+  }, [videoSlug])
+
+  if(!video){
+    return (
+        <h1>Loading</h1>
+    )
+  }
+
   return(
     <C.Container>
       <C.VideoContainer>
         <C.Video>
           <Player>
-            <Youtube videoId="sk1Z-Hqwwog" /> 
+            <Youtube videoId={video.video_id} /> 
             <DefaultUi />
           </Player>
         </C.Video>
@@ -19,36 +64,38 @@ export function Video(){
       <C.InfoWrapper>
         <C.InfoHeader>
           <C.MusicVideoInfo>
-            <C.MusicVideoTitle>私は最強 - ウタ from ONE PIECE FILM RED</C.MusicVideoTitle>
-            <C.MusicVideoDescription>いつかの夢が  私の心臓</C.MusicVideoDescription>
+            <C.MusicVideoTitle>{video.title}</C.MusicVideoTitle>
+            <C.MusicVideoDescription>{video.description}</C.MusicVideoDescription>
             <C.SingerInfo>
-              <C.SingerImage src="https://yt3.ggpht.com/nt3XgEI74R1VvNmQN22CLrSuEE838KKN5e9XpHpzcRvGIbAOVtTdYr_zR35YHiuYufEKaP3osg=s88-c-k-c0x00ffffff-no-rj" alt="Ado" />
+              <C.SingerImage src={video.singer.avatar_url} alt={video.singer.name} />
               <C.SingerSocial>
-                <C.SingerName>Ado</C.SingerName>
+                <C.SingerName>{video.singer.name}</C.SingerName>
                 <C.SingerSocialLinks>
-                  <C.SocialLink href="https://twitter.com/ado1024imokenp" target="_blank">
+                  <C.SocialLink href={video.singer.twitter} target="_blank">
                     <FaTwitter />
                   </C.SocialLink>
-                  <C.SocialLink href="https://www.youtube.com/c/Ado1024" target="_blank">
+                  <C.SocialLink href={video.singer.youtube} target="_blank">
                     <FaYoutube />
                   </C.SocialLink>
                 </C.SingerSocialLinks>
               </C.SingerSocial>
             </C.SingerInfo>
-            <C.FeatDiv>
-              <C.FeatName>feat. <strong>Vaundy</strong></C.FeatName>
-              <C.FeatSocial>
-                <C.SocialLink href="https://twitter.com/vaundy_engawa" target="_blank">
-                  <FaTwitter />
-                </C.SocialLink>
-                <C.SocialLink href="https://www.youtube.com/c/Vaundy" target="_blank">
-                  <FaYoutube />
-                </C.SocialLink>
-              </C.FeatSocial>
-            </C.FeatDiv>
+            {video.feat && (
+              <C.FeatDiv>
+                <C.FeatName>feat. <strong>{video.feat.name}</strong></C.FeatName>
+                <C.FeatSocial>
+                  <C.SocialLink href={video.feat.twitter} target="_blank">
+                    <FaTwitter />
+                  </C.SocialLink>
+                  <C.SocialLink href={video.feat.youtube} target="_blank">
+                    <FaYoutube />
+                  </C.SocialLink>
+                </C.FeatSocial>
+              </C.FeatDiv>
+            )}
           </C.MusicVideoInfo>
           <C.ButtonsWrap>
-            <C.Button href="https://www.youtube.com/watch?v=sk1Z-Hqwwog" target="_blank"> <FaYoutube size={24} /> Watch on Youtube</C.Button>
+            <C.Button href={`https://www.youtube.com/watch?v=${video.video_id}`} target="_blank"> <FaYoutube size={24} /> Watch on Youtube</C.Button>
             <C.Button href="https://www.onepiece-film.jp/uta/" target="_blank"> <FaLink  size={20} /> Official site</C.Button>
           </C.ButtonsWrap>
         </C.InfoHeader>

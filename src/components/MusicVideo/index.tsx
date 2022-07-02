@@ -1,6 +1,7 @@
 import { format, isPast, parseISO } from 'date-fns';
 import { FaLock, FaRegCheckCircle } from 'react-icons/fa'
 import { useParams } from 'react-router-dom';
+import { useGlobalContext } from '../../hooks/useGlobalContext';
 import * as C from './styles' 
 
 interface MusicVideoProps{
@@ -16,8 +17,11 @@ export function MusicVideo({ available_at, title, slug: props_slug }: MusicVideo
   const availableDateFormatted = format(new Date(available_at), "dd MMM yyyy")
 
   const isActiveVideo = slug === props_slug
+
+  const { closeMenu } = useGlobalContext()
+
   return(
-    <C.container to={`/video/${props_slug}`} isVideoReleased={isVideoReleased}>
+    <C.container to={`/video/${props_slug}`} $isVideoReleased={isVideoReleased} onClick={closeMenu}>
       <C.date>
         {availableDateFormatted}
       </C.date>

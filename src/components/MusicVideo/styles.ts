@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 
-export const container = styled(Link)<{ isVideoReleased: boolean }>`
+export const container = styled(Link)<{ $isVideoReleased: boolean }>`
   cursor: pointer;
   display: block;
 
-  pointer-events: ${({isVideoReleased}) => !isVideoReleased ? 'none' : ''} ;
+  pointer-events: ${({$isVideoReleased}) => !$isVideoReleased ? 'none' : ''} ;
 
   & + & {
       margin-top: 2rem;

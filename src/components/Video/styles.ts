@@ -3,12 +3,13 @@ import styled from "styled-components";
 export const Container = styled.div`
   background-color: #6E3730;  
   flex: 1;
+  height: 100%;
 `;
 
 export const VideoContainer = styled.div`
   max-height: 60vh;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   flex: 1;
   background-color: #111;
 `;
@@ -24,7 +25,6 @@ export const Video = styled.div`
 export const InfoWrapper = styled.div`
   padding: 2rem;
   padding-bottom: 4rem;
-  /* display: flex; */
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
 
   @media (max-width: 900px){
@@ -43,7 +43,9 @@ export const InfoHeader = styled.div`
   }
 `;
 
-export const MusicVideoInfo = styled.div``;
+export const MusicVideoInfo = styled.div`
+  height: 100%;
+`;
 
 export const MusicVideoTitle = styled.strong`
   display: block;

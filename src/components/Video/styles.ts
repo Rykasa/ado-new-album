@@ -1,4 +1,37 @@
+import { BiLoaderCircle } from "react-icons/bi";
 import styled from "styled-components";
+
+export const Loader = styled.div`
+  width: 100%;
+  height: calc(100vh - 4.5rem);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex: 1;
+`;
+
+export const LoaderIcon = styled(BiLoaderCircle)`
+  animation: spin 2s infinite linear;
+  font-size: 3rem;
+  color: #fff;
+
+  @keyframes spin{
+    0%{
+      transform: rotate(0);
+    }
+    50%{
+      transform: rotate(180deg);
+
+    }
+    100%{
+      transform: rotate(360deg);
+    }
+  }
+`; 
+
+export const LoaderText = styled.h1`
+  color: #fff;
+`;
 
 export const Container = styled.div`
   background-color: #6E3730;  

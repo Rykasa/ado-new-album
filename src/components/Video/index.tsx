@@ -6,6 +6,7 @@ import { FaLink, FaTwitter, FaYoutube } from 'react-icons/fa'
 import '@vime/core/themes/default.css';
 import { api } from '../../services/api';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface VideoType{
   videoSlug: string | undefined;
@@ -33,11 +34,16 @@ interface getSingleMusicVideoResponse{
 
 export function Video({videoSlug}: VideoType){
   const [video, setVideo] = useState<getSingleMusicVideoResponse | null>(null)
+  const navigate = useNavigate()
 
   async function getSingleMusicVideo(){
     const result = await api.get<getSingleMusicVideoResponse>(`/video/${videoSlug}`)
     const { data } = result
     setVideo(data)
+    
+    if(data === null){
+      navigate('/video/1')
+    }
   }
 
   useEffect(() =>{
@@ -47,7 +53,9 @@ export function Video({videoSlug}: VideoType){
 
   if(!video){
     return (
-        <h1>Loading</h1>
+      <C.Loader>
+        <C.LoaderIcon />
+      </C.Loader>
     )
   }
 

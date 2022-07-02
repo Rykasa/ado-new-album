@@ -19,7 +19,7 @@ export const Aside = styled.aside<{ isMenuOpen: boolean }>`
     width: 100%;
     height: fit-content;
     top: 4.5rem;
-    top: ${({isMenuOpen}) => isMenuOpen ? '4.5rem' :  '-100%'};
+    top: ${({isMenuOpen}) => isMenuOpen ? '4.5rem' :  '-150%'};
     left: 0;
     z-index: 50;
     /* display: ${({isMenuOpen}) => isMenuOpen ? 'block' : 'none'}; */

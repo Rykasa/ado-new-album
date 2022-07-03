@@ -4,8 +4,7 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   
-  background-color: var(--dark-color);
-  /* background: linear-gradient(var(--dark-color) 60%, 90%, #94ecd3); */
+  background: linear-gradient(var(--dark-color) 60%, 90%, #35191b);
 `;
 
 export const CenterDiv = styled.div`

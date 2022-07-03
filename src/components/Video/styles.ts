@@ -109,6 +109,7 @@ export const ButtonsWrap =styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-top: .5rem;
 `;
 
 export const Button = styled.a`

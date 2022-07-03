@@ -1,5 +1,5 @@
 import * as C from './styles'
-import {  Youtube ,Player, DefaultUi } from '@vime/react'
+import {  Youtube ,Player, DefaultUi, Embed } from '@vime/react'
 // import Youtube from 'react-youtube'
 import { FaLink, FaTwitter, FaYoutube } from 'react-icons/fa'
 
@@ -47,6 +47,13 @@ export function Video({videoSlug}: VideoType){
   }
 
   useEffect(() =>{
+    const hasToken = localStorage.getItem('@adoplaylist:token')
+    if(!hasToken){
+      navigate('/subscribe')
+    }
+  }, [])
+
+  useEffect(() =>{
     setVideo(null)
     getSingleMusicVideo()
   }, [videoSlug])
@@ -64,7 +71,7 @@ export function Video({videoSlug}: VideoType){
       <C.VideoContainer>
         <C.Video>
           <Player>
-            <Youtube videoId={video.video_id} /> 
+            <Youtube videoId={video.video_id}/> 
             <DefaultUi />
           </Player>
         </C.Video>

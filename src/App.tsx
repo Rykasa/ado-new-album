@@ -8,7 +8,7 @@ export function App(){
     <GlobalContextProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/subscribe" element={<Subscribe />} />
+          <Route path="/" element={<Subscribe />} />
           <Route path="/video/:slug" element={<MVEvent />} />
           <Route path="*" element={<MVEvent /> } />
         </Routes>

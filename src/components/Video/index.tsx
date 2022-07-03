@@ -49,7 +49,7 @@ export function Video({videoSlug}: VideoType){
   useEffect(() =>{
     const hasToken = localStorage.getItem('@adoplaylist:token')
     if(!hasToken){
-      navigate('/subscribe')
+      navigate('/')
     }
   }, [])
 

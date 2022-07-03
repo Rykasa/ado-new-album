@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 100vh;
   
   background-color: var(--dark-color);
-  background: linear-gradient(var(--dark-color) 50%, 90%, #94ecd3);
+  /* background: linear-gradient(var(--dark-color) 60%, 90%, #94ecd3); */
 `;
 
 export const CenterDiv = styled.div`
@@ -102,8 +102,9 @@ export const FormContent = styled.div`
   height: max-content;
   width: max-content;
 
-  @media (max-width: 700px){
+  @media (max-width: 1090px){
     padding: 1rem;
+    width: 100%;
   }
 `;
 
@@ -113,6 +114,8 @@ export const FormText = styled.span`
   margin-bottom: 1.5rem;
   display: block;
   letter-spacing: .1rem;
+  font-weight: bold;
+
 
   @media (max-width: 1150px){
     font-size: 1.125rem;
@@ -145,7 +148,7 @@ export const Input = styled.input`
     outline: none;
   }
 
-  @media (max-width: 700px){
+  @media (max-width: 1090px){
     width: 100%;
   }
 `;
@@ -160,9 +163,15 @@ export const Button = styled.button`
   font-weight: bold;
   color: #fff;
   cursor: pointer;
-  transition: all .3s linear; 
+  transition: background-color .3s linear; 
+  width: 19rem;
+
 
   &:hover{
     background-color: var(--primary-color-dark)
+  }
+
+  @media (max-width: 1090px){
+    width: 100%;
   }
 `;

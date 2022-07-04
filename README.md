@@ -30,4 +30,4 @@ npm install
 Once the dependencies are installed, you can run `npm run dev` to start the application. You will then be able to access it at localhost:3000.
 
 ## 📝 License
-This project is licensed under the terms of the MIT license. See [LICENSE](LICENSE.md) for more details.
+This project is licensed under the terms of the MIT license. See [LICENSE](LICENSE) for more details.

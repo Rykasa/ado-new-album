@@ -1,7 +1,8 @@
-import * as C from './styles'
-import {  Youtube ,Player, DefaultUi, Embed } from '@vime/react'
-// import Youtube from 'react-youtube'
-import { FaLink, FaTwitter, FaYoutube } from 'react-icons/fa'
+import * as C from './styles';
+import {  Youtube ,Player, DefaultUi } from '@vime/react';
+import { FaLink, FaTwitter, FaYoutube } from 'react-icons/fa';
+
+import singerAvatarUrl from '../../assets/ado-profile.jpg';
 
 import '@vime/core/themes/default.css';
 import { api } from '../../services/api';
@@ -82,7 +83,7 @@ export function Video({videoSlug}: VideoType){
             <C.MusicVideoTitle>{video.title}</C.MusicVideoTitle>
             <C.MusicVideoDescription>{video.description}</C.MusicVideoDescription>
             <C.SingerInfo>
-              <C.SingerImage src={video.singer.avatar_url} alt={video.singer.name} />
+              <C.SingerImage src={singerAvatarUrl} alt={video.singer.name} />
               <C.SingerSocial>
                 <C.SingerName>{video.singer.name}</C.SingerName>
                 <C.SingerSocialLinks>
